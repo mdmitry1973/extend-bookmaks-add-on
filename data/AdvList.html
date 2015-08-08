@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html>
+<html>
+ 
+<head>
+<!--link rel="stylesheet" type="text/css" href="AdvList.css" /-->
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+<meta content="utf-8" http-equiv="encoding">
+<script type="text/javascript">
+    
+   function init_table()
+   {
+		//window.alert("init_table 1");
+		
+		document.documentElement.addEventListener("SetListOfLinks", function(event) {
+        
+		//window.alert(event.detail);
+		
+        var message = JSON.parse(event.detail);
+		var itemTable = document.getElementById("itemTable");
+		var navUL = document.getElementById("navUL");
+		
+		jsObject = message.bookmarks;
+		
+		for (var i = 0; i < jsObject.length; i++)
+		{
+			var _li = document.createElement("li");
+			var _a = document.createElement("a");
+			var _t = document.createTextNode(jsObject[i].label);
+			
+			_a.href = jsObject[i].url;
+			_a.onclick = function(event){doLink(event);};
+			_a.id = "" + i;
+			
+			_a.appendChild(_t);
+			_li.appendChild(_a);
+			navUL.appendChild(_li);
+		}
+        
+      }, false);
+	  
+		//window.alert("init_table");
+      
+        var event = document.createEvent('CustomEvent');
+        event.initCustomEvent("RequestListOfLinks", true, true, "");
+        document.documentElement.dispatchEvent(event);
+   }
+   
+   function doLink(evt)
+   {
+		var id = evt.currentTarget.id;
+       
+		//window.alert(id);
+		
+		var event = document.createEvent('CustomEvent');
+        event.initCustomEvent("RequestOpenLink", true, true, id);
+        document.documentElement.dispatchEvent(event);
+   }
+
+</script>
+
+</head>
+ 
+<body onload="init_table();">
+
+
+<!--link rel="stylesheet" href="style.css" type="text/css" media="screen"-->
+<div class="example1" id="itemTable">
+    <ul id="navUL">
+        <!--li><a href="http://www.script-tutorials.com/about/">About</a></li>
+        <li><a href="http://www.script-tutorials.com/creating-css3-dropdown-menu/">Go Back To The Tutorial</a></li-->
+    </ul>
+</div>
+
+<!--div class="example">
+    <ul id="nav">
+        <li class="current"><a href="http://www.script-tutorials.com/">Home</a></li>
+        </ul>
+            <ul>
+                <li><a href="http://www.script-tutorials.com/category/html-css/">HTML / CSS</a></li>
+                <li><a href="http://www.script-tutorials.com/category/jquery/">JS / jQuery</a>
+                    <ul>
+                        <li><a href="http://www.script-tutorials.com/category/jquery/">jQuery</a></li>
+                        <li><a href="http://www.script-tutorials.com/category/javascript/">JS</a></li>
+                    </ul>
+                </li>
+                <li><a href="http://www.script-tutorials.com/category/php/">PHP</a></li>
+                <li><a href="http://www.script-tutorials.com/category/mysql/">MySQL</a></li>
+                <li><a href="http://www.script-tutorials.com/category/xslt/">XSLT</a></li>
+                <li><a href="http://www.script-tutorials.com/category/ajax/">Ajax</a></li>
+            </ul>
+        </li>
+        <li><a href="http://www.script-tutorials.com/category/resources/">Resources</a>
+            <ul>
+                <li><a href="http://www.script-tutorials.com/category/resources/">By category</a>
+                    <ul>
+                        <li><a href="http://www.script-tutorials.com/category/php/">PHP</a></li>
+                        <li><a href="http://www.script-tutorials.com/category/mysql/">MySQL</a></li>
+                        <li><a href="http://www.script-tutorials.com/category/xslt/">XSLT</a></li>
+                        <li><a href="http://www.script-tutorials.com/category/ajax/">Ajax</a></li>
+                    </ul>
+                </li>
+                <li><a href="http://www.script-tutorials.com/category/resources/">By tag name</a>
+                    <ul>
+                        <li><a href="http://www.script-tutorials.com/tag/captcha/">captcha</a></li>
+                        <li><a href="http://www.script-tutorials.com/tag/gallery/">gallery</a></li>
+                        <li><a href="http://www.script-tutorials.com/tag/animation/">animation</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li><a href="http://www.script-tutorials.com/about/">About</a></li>
+        <li><a href="http://www.script-tutorials.com/creating-css3-dropdown-menu/">Go Back To The Tutorial</a></li>
+    </ul>
+</div-->
+		
+</body>
+
+</html>
