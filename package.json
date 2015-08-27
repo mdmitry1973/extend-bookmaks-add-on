@@ -35,7 +35,7 @@
     "1": "addon-kit",
     "menuitem": "0.0.4"
   },
-  "version": "1.0.9",
+  "version": "1.0.11",
   "lib": "lib",
   "fullName": "Advanced bookmaks Add-on",
   "main": "lib/main.js",

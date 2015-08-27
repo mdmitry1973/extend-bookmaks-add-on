@@ -21,19 +21,29 @@
 		
 		jsObject = message.bookmarks;
 		
-		for (var i = 0; i < jsObject.length; i++)
+		if (jsObject.length == 0)
 		{
-			var _li = document.createElement("li");
-			var _a = document.createElement("a");
-			var _t = document.createTextNode(jsObject[i].label);
+			var itemMessage = document.getElementById("idMessage");
+			var _t = document.createTextNode(message.NoItems);
 			
-			_a.href = jsObject[i].url;
-			_a.onclick = function(event){doLink(event);};
-			_a.id = "" + i;
-			
-			_a.appendChild(_t);
-			_li.appendChild(_a);
-			navUL.appendChild(_li);
+			itemMessage.appendChild(_t);
+		}
+		else
+		{
+			for (var i = 0; i < jsObject.length; i++)
+			{
+				var _li = document.createElement("li");
+				var _a = document.createElement("a");
+				var _t = document.createTextNode(jsObject[i].label);
+				
+				_a.href = jsObject[i].url;
+				_a.onclick = function(event){doLink(event);};
+				_a.id = "" + i;
+				
+				_a.appendChild(_t);
+				_li.appendChild(_a);
+				navUL.appendChild(_li);
+			}
 		}
         
       }, false);
@@ -55,6 +65,15 @@
         event.initCustomEvent("RequestOpenLink", true, true, id);
         document.documentElement.dispatchEvent(event);
    }
+   
+   function doBookmarksManager()
+   {
+		//window.alert("doBookmarksManager");
+		
+		var event = document.createEvent('CustomEvent');
+        event.initCustomEvent("RequestBookmarksManager", true, true, "");
+        document.documentElement.dispatchEvent(event);
+   }
 
 </script>
 
@@ -62,57 +81,14 @@
  
 <body onload="init_table();">
 
-
-<!--link rel="stylesheet" href="style.css" type="text/css" media="screen"-->
+<div style="width:100%;height:30px;background:#f3f3f3;" id="idMessage"></div>
 <div class="example1" id="itemTable">
     <ul id="navUL">
         <!--li><a href="http://www.script-tutorials.com/about/">About</a></li>
         <li><a href="http://www.script-tutorials.com/creating-css3-dropdown-menu/">Go Back To The Tutorial</a></li-->
     </ul>
 </div>
+<button name="BookmarksManager" onclick="doBookmarksManager()">Bookmarks Manager</button>
 
-<!--div class="example">
-    <ul id="nav">
-        <li class="current"><a href="http://www.script-tutorials.com/">Home</a></li>
-        </ul>
-            <ul>
-                <li><a href="http://www.script-tutorials.com/category/html-css/">HTML / CSS</a></li>
-                <li><a href="http://www.script-tutorials.com/category/jquery/">JS / jQuery</a>
-                    <ul>
-                        <li><a href="http://www.script-tutorials.com/category/jquery/">jQuery</a></li>
-                        <li><a href="http://www.script-tutorials.com/category/javascript/">JS</a></li>
-                    </ul>
-                </li>
-                <li><a href="http://www.script-tutorials.com/category/php/">PHP</a></li>
-                <li><a href="http://www.script-tutorials.com/category/mysql/">MySQL</a></li>
-                <li><a href="http://www.script-tutorials.com/category/xslt/">XSLT</a></li>
-                <li><a href="http://www.script-tutorials.com/category/ajax/">Ajax</a></li>
-            </ul>
-        </li>
-        <li><a href="http://www.script-tutorials.com/category/resources/">Resources</a>
-            <ul>
-                <li><a href="http://www.script-tutorials.com/category/resources/">By category</a>
-                    <ul>
-                        <li><a href="http://www.script-tutorials.com/category/php/">PHP</a></li>
-                        <li><a href="http://www.script-tutorials.com/category/mysql/">MySQL</a></li>
-                        <li><a href="http://www.script-tutorials.com/category/xslt/">XSLT</a></li>
-                        <li><a href="http://www.script-tutorials.com/category/ajax/">Ajax</a></li>
-                    </ul>
-                </li>
-                <li><a href="http://www.script-tutorials.com/category/resources/">By tag name</a>
-                    <ul>
-                        <li><a href="http://www.script-tutorials.com/tag/captcha/">captcha</a></li>
-                        <li><a href="http://www.script-tutorials.com/tag/gallery/">gallery</a></li>
-                        <li><a href="http://www.script-tutorials.com/tag/animation/">animation</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-        <li><a href="http://www.script-tutorials.com/about/">About</a></li>
-        <li><a href="http://www.script-tutorials.com/creating-css3-dropdown-menu/">Go Back To The Tutorial</a></li>
-    </ul>
-</div-->
-		
 </body>
-
 </html>

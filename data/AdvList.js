@@ -17,3 +17,9 @@ document.documentElement.addEventListener("RequestOpenLink", function(event) {
   self.port.emit("RequestOpenLink", event.detail);
   
 }, false);
+
+document.documentElement.addEventListener("RequestBookmarksManager", function(event) {
+  console.log("RequestBookmarksManager=" + event.detail);
+  self.port.emit("RequestBookmarksManager", event.detail);
+  
+}, false);
